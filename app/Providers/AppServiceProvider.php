@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Binary\Smartphone\Smartphone;
+use App\Binary\Smartphone\Battery;
+use App\Binary\Smartphone\Camera;
+use App\Binary\Smartphone\Display;
+use App\Binary\Smartphone\Processor;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
-        //
+    {  
+        $this->app->bind('Smartphone', Smartphone::class);
     }
 }

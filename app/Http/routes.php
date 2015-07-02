@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/show', 'SmartphoneController@getShowProperties');
+
+Route::get('/shorten', function () {
+    $longUrl = 'https://google.com';
+    $shortUrl = Bitly::shorten($longUrl)['data']['url'];
+    return View::make('smartphone.show', ['link' => $shortUrl]);
+});
+
+Route::get('/app', function () {
+    $smartphone = app()->make('Smartphone');
 });

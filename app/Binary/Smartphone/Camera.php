@@ -39,8 +39,8 @@ class Camera
   		$this->pixels = $value;
   	}
 
-    public function __toString()
-    {
-      return (string)$this->pixels . " megapixels camera";
-    }
+    	public function __toString()
+    	{
+      		return (string)$this->pixels . " megapixels camera";
+    	}
 }

@@ -40,7 +40,7 @@ class Display
             	  case 'resolutiony':
             		$this->resolutionY = $value;
                 	break;
-        	}
+        }
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Display
                 	return $this->resolutionX;
               	  case 'resolutionY':
             		return $this->resolutionY;
-        	}
+        }
 	}
 	
 	public function __toString()

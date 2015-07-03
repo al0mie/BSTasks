@@ -4,6 +4,7 @@
 	<title>Information about smartphones</title>
 </head>
 <body>
-{{$link}}
+Information about smartphone:<br><br>
+{{$smartphone}}
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Binary\Smartphone\Display;
+namespace App\Binary\Smartphone;
 
 /**
  * Entity of the disaplay
@@ -9,7 +9,7 @@ namespace App\Binary\Smartphone\Display;
 */
 class Display 
 {	
-	private $resulutionX;
+	private $resolutionX;
 	private $resolutionY;
 	
 	/**
@@ -18,39 +18,52 @@ class Display
 	 * @param string $vendor 
 	 * @param int $cores 
 	 */
-	public function __construct($resulutionX, $resolutionY)
+	public function __construct($resolutionX, $resolutionY)
 	{
-		$this->resulutionX = $resulutionX;
+		$this->resolutionX = $resolutionX;
 		$this->resolutionY = $resolutionY;
 	}
 
+	/**
+	 * Setter
+	 *
+	 * @param string $property 
+	 * @param int $value 
+	 */
 	public function __set($property, $value)
 	{
 		switch ($property)
         {
-            case 'resulutionX':
-                $this->resulutionX = $value;
+            case 'resolutionX':
+                $this->resolutionX = $value;
                 break;
-            case 'resulutiony':
-            	$this->resulutionY = $value;
+            case 'resolutiony':
+            	$this->resolutionY = $value;
                 break;
         }
 	}
 
+	/**
+	 * Getter
+	 *
+	 * @param string $property 
+	 *
+	 * @return int 
+	 */
 	public function __get($property)
 	{	
 		switch ($property)
         {
-            case 'resulutionX':
-                return $this->bar;
-            case 'resulutionY':
-            	return $this->bar;
+            case 'resolutionX':
+                return $this->resolutionX;
+            case 'resolutionY':
+            	return $this->resolutionY;
         }
 	}
-
+	
 	public function __toString()
 	{
-		return $this->resulutionX . "X" . $this->resulutionY . "display ";
+		return $this->resolutionX . "X" . $this->resolutionY . " display";
 	}
 }
 

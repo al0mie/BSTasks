@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Binary\Smartphone\Smartphone;
+namespace App\Binary\Smartphone;
 
 /**
  * Entity of the smartphone
  *
  * @author Aleksandr Mokrenko <alex.mokrenko@yanex.ru>
  */
-class Smartphone 
+class Smartphone implements ISmartphone
 {
     private $name;
     private $processor;
@@ -25,10 +25,10 @@ class Smartphone
      * @param Battery $battery 
      */
     public function __construct($name,
-                                 $processor,
-                                 $display,
-                                 $camera,
-                                 $battery
+                                Processor $processor,
+                                Display $display,
+                                Camera $camera,
+                                Battery $battery
                                 )
     {
         $this->name = $name;
@@ -68,7 +68,10 @@ class Smartphone
                
             case 'processor':
                return $this->processor;
-                
+               
+            case 'display':
+                return $this->display; 
+
             case 'camera':
                 return $this->camera;
                 
@@ -80,12 +83,10 @@ class Smartphone
 
     public function __toString()
     {
-        return $this->name . "," . 
-                $this->processor . "," . 
-                $this->display . "," . 
-                $this->camera . "," . 
-                $this->battery;
-
+        return $this->name . ", " .
+               $this->processor . ", " . 
+               $this->display . ", " . 
+               $this->camera . ", " . 
+               $this->battery;
     }
-
 }

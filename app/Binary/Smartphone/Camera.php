@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Binary\Smartphone\Camera;
+namespace App\Binary\Smartphone;
 
 /**
  * Entity of the camera
@@ -39,8 +39,8 @@ class Camera
   		$this->pixels = $value;
   	}
 
-    public function toString()
+    public function __toString()
     {
-      return $this->pixels . "megapixels camera ";
+      return (string)$this->pixels . " megapixels camera";
     }
 }

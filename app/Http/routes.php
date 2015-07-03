@@ -10,16 +10,23 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Binary\Smartphone\ISmartphone;
 
-Route::get(	'/show', 'SmartphoneController@getShowProperties');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+//Route::get('/phone', 'SmartphoneController@getShowProperties');
 
 Route::get('/shorten', function () {
-    $shortUrl = Bitly::shorten('https://google.com')['data']['url'];
-    return View::make('shorten.show', ['link' => $shortUrl]);
+	$link = 'https://google.com';
+	$shortUrl = Bitly::shorten($link)['data']['url'];
+    return view('shorten', ['url' => $shortUrl]);
 });
 
-Route::get('/app', function () {
-    $smartphone = app()->make('Smartphone');
+Route::get('/phone', function () {
+    $smartphone = app()->make('CustomSmartphone');
+    return view('smartphone.show', ['smartphone' => (string)$smartphone]);
 });
 
-
+Route::get('/phone_another', 'SmartphoneController@getShowProperties');

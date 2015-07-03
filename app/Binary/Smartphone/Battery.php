@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Binary\Smartphone\Battery;
+namespace App\Binary\Smartphone;
 
 /**
  * Entity of the memory 
@@ -23,17 +23,17 @@ class Battery
 	}
 
 	/**
-	 * getter for capacity
+	 * Getter for capacity
 	 *
 	 * @return int 
 	 */
-	 public function __get($capacity)
+	public function __get($capacity)
     {
         return $this->capacity;
     }
 
     /**
-     * setter for capacity
+     * Setter for capacity
      *
      * @param int $capacity 
      */
@@ -49,6 +49,6 @@ class Battery
      */
     public function __toString()
     {
-    	return "battery capacity" . $this->$capacity . "mAh ";
+    	return "battery capacity " . $this->capacity . " mAh";
     }
 }

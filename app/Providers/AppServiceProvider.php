@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Providers;
-
 use App\Binary\Smartphone\Smartphone;
 use App\Binary\Smartphone\Battery;
 use App\Binary\Smartphone\Camera;
@@ -27,11 +25,32 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {  
-        // Interface to implementation binding
-        $this->app->bind(
-            'App\Binary\UserRepository',
-            'App\Binary\Repository\ArrayUserRepository'
+    { 
+       $this->app->bind(
+            'App\Binary\Smartphone\ISmartphone',
+            'App\Binary\Smartphone\Smartphone'
         );
+
+       $this->app->bind('Smartphone', Smartphone::class);
+
+       $this->app->bind('CustomSmartphone', function ($app) {
+            return new Smartphone('Iphone',
+                new Processor('IphoneCPU', '2'),
+                new Display('280','480'),
+                new Camera('5'),
+                new Battery('2000')
+               
+            );
+        });
+
+        $smartphone = new Smartphone("AnotherCustomSmartphone", 
+                                    new Processor('Intel CPU','4'), 
+                                    new Display('500','500'), 
+                                    new Camera('20'), 
+                                    new Battery('2000'));
+
+        $this->app->instance('AnotherCustomSmartphone', $smartphone);
+
+       
     }
 }

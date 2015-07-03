@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Binary\Smartphone\Processor;
+namespace App\Binary\Smartphone;
 
 /**
  * Entity of the processor
@@ -24,12 +24,12 @@ class Processor
 		$this->cores = $cores;
 	}
 
-	/**
-	 * Setter
-	 *
-	 * @param string $vendor 
-	 * @param int $cores 
-	 */
+    /**
+     * Setter
+     *
+     * @param string $property
+     * @param string $value
+     */
 	public function __set($property, $value)
     {
         switch ($property)
@@ -43,6 +43,12 @@ class Processor
         }
     }
 
+    /**
+     * Getter
+     *
+     * @param $property
+     * @return int|string
+     */
     public function __get($property)
     {
         switch ($property)
@@ -57,7 +63,7 @@ class Processor
 
     public function __toString()
     {
-    	return $this->vendor . " " . $this->cores . "cores ";
+    	return $this->vendor . " " . $this->cores . " cores";
     }
 }
 

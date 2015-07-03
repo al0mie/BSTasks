@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Binary\Smartphone;
+namespace App\Binary\Smartphone\Smartphone;
 
 /**
  * Entity of the smartphone
@@ -77,4 +77,15 @@ class Smartphone
                 
         }
     }
+
+    public function __toString()
+    {
+        return $this->name . "," . 
+                $this->processor . "," . 
+                $this->display . "," . 
+                $this->camera . "," . 
+                $this->battery;
+
+    }
+
 }

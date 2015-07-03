@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Binary\Battery;
+namespace App\Binary\Smartphone\Battery;
 
 /**
  * Entity of the memory 
@@ -19,7 +19,7 @@ class Battery
 	 */
 	public function __construct($capacity)
 	{
-		this->capacity = $capacity;
+		$this->capacity = $capacity;
 	}
 
 	/**
@@ -27,7 +27,7 @@ class Battery
 	 *
 	 * @return int 
 	 */
-	 public function __get()
+	 public function __get($capacity)
     {
         return $this->capacity;
     }
@@ -37,8 +37,18 @@ class Battery
      *
      * @param int $capacity 
      */
-    public function __set($capacity)
+    public function __set($capacity, $value)
     {
-        $this->capacity = $capacity;
+        $this->capacity = $value;
+    }
+
+    /**
+     * String format for battery
+     *
+     * @return string 
+     */
+    public function __toString()
+    {
+    	return "battery capacity" . $this->$capacity . "mAh ";
     }
 }

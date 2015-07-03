@@ -4,7 +4,7 @@
  * Populate only the needed fields and comment/remove the others
  */
 return array(
-    "access_token" => null,
+    "access_token" => 'R_303a8b5cab4f4006931f83ea7542a245',
     "cache_enabled" => false,
     "cache_duration" => 3600, // Duration in minutes
     "cache_key_prefix" => "Bitly4Laravel.",

@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class SmartphoneController extends Controller
 {
     public function getShowProperties(){
-      
-       return View::make('smartphone.show', $context);
+	      
+	
     }
 }

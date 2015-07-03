@@ -1,12 +1,12 @@
 <?php 
 
-namespace App\Binary\Processor;
+namespace App\Binary\Smartphone\Processor;
 
 /**
  * Entity of the processor
  *
  * @author Aleksandr Mokrenko <alex.mokrenko@yandex.ru>
-*/
+ */
 class Processor 
 {	
 	private $vendor;
@@ -53,6 +53,11 @@ class Processor
             case 'cores':
                return $this->cores;
         }
+    }
+
+    public function __toString()
+    {
+    	return $this->vendor . " " . $this->cores . "cores ";
     }
 }
 

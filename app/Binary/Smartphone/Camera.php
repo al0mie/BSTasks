@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Binary\Battery;
+namespace App\Binary\Smartphone\Camera;
 
 /**
  * Entity of the camera
@@ -18,7 +18,7 @@ class Camera
   	 */
   	public function __construct($pixels)
   	{
-  		this->pixels = $pixels;
+  		$this->pixels = $pixels;
   	}
 
   	/**
@@ -26,7 +26,7 @@ class Camera
   	 *
   	 * @return [type] [description]
   	 */
-  	public function __get()
+  	public function __get($pixels)
   	{
   		return $this->pixels;
   	}
@@ -34,8 +34,13 @@ class Camera
   	/**
   	 * Setter for the camera
   	 */
-  	public function __set($pixels)
+  	public function __set($pixels, $value)
   	{
-  		this->pixels = $pixels;
+  		$this->pixels = $value;
   	}
+
+    public function toString()
+    {
+      return $this->pixels . "megapixels camera ";
+    }
 }

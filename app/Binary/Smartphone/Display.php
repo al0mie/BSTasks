@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Binary\Display;
+namespace App\Binary\Smartphone\Display;
 
 /**
  * Entity of the disaplay
@@ -46,6 +46,11 @@ class Display
             case 'resulutionY':
             	return $this->bar;
         }
+	}
+
+	public function __toString()
+	{
+		return $this->resulutionX . "X" . $this->resulutionY . "display ";
 	}
 }
 

@@ -28,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {  
-        $this->app->bind('Smartphone', Smartphone::class);
+        // Interface to implementation binding
+        $this->app->bind(
+            'App\Binary\UserRepository',
+            'App\Binary\Repository\ArrayUserRepository'
+        );
     }
 }

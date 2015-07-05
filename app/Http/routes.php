@@ -11,8 +11,7 @@
 |
 */
 use App\Binary\Smartphone\ISmartphone;
-
-Route::get('/', function () {
+Route::get('as/', function () {
     return view('welcome');
 });
 

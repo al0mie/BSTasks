@@ -10,7 +10,9 @@
 	<nav class = "navbar navbar-inverse">
 		<ul class="nav navbar-nav">
 			<li><a href="{{ URL::to('user')}}">View all users</a></li>
+			<li><a href="{{ URL::to('book')}}">View all books</a></li>
 			<li><a href="{{ URL::to('user/create')}}">Create user</a></li>
+			<li><a href="{{ URL::to('book/create')}}">Create book</a></li>
 		</ul>
 	</nav>
 
@@ -19,7 +21,6 @@
 @if(Session::has('message'))	
 	<div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
-
 
 @yield('content')
 

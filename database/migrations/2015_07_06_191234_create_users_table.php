@@ -18,13 +18,18 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email')->unique();
-            $table->integer('book_id')->unsigned();
-            $table->timestamps();
-            $table->foreign('book_id')
-                  ->references('id')->on('books');
+            
+        });
 
+        Schema::table('books', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
         });
     }
+      
+    
 
     /**
      * Reverse the migrations.

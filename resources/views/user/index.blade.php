@@ -1,11 +1,11 @@
 @extends('app')
 
 @section('pagetitle')
-User list
+General user list
 @stop
 
 @section('content')
-hello
+ 
 <table class="table table-stripped table-bordered">
 	<thead>
 		<tr>
@@ -26,12 +26,13 @@ hello
 			<td> {{ $user->lastname }}</td>
 			<td> {{ $user->email }}</td>
 
-			<td width="400">
-				<a class = "btn btn-small btn-success" href="{{ URL::to('users/' . $user->id)}}">Show this user</a>
-				<a class = "btn btn-small btn-info" href="{{ URL::to('users/' . $user->id . '/edit')}}">Edit this user</a>
-			{!! Form::open(array('url' => 'users/' . $user->id, 'class' => 'pull-right')) !!}
+			<td width="210">
+				<a class = "btn btn-small btn-success" href="{{ URL::to('user/' . $user->id)}}">Books</a>
+				<a class = "btn btn-small btn-info" href="{{ URL::to('user/' . $user->id.'/edit')}}">Edit</a>
+
+			{!! Form::open(array('url' => 'user/' . $user->id, 'class' => 'pull-right')) !!}
 			{!! Form::hidden('_method', 'DELETE') !!}
-			{!! Form::submit('Delete this user', array('class' => 'btn btn-warning')) !!}
+			{!! Form::submit('Delete', array('class' => 'btn btn-warning')) !!}
 			{!! Form::close() !!}
 			</td>
 		</tr>
@@ -39,7 +40,6 @@ hello
 
 	</tbody>
 
-
 </table>
-
+{!! $users->render() !!}
 @stop

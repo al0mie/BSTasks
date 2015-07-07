@@ -24,12 +24,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['firstname', 'lastname', 'email'];
+    public $fillable = ['firstname', 'lastname', 'email'];
 
     public static $rules = array(
         'firstname'=>'required|min:2|alpha',
         'lastname'=>'required|min:2|alpha',
-        'email'=>'required|email|unique:users',
+        'email'=>'required|email|unique:users,email,',
    );
 
 

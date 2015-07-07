@@ -3,6 +3,7 @@
 
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class BooksTableSeeder extends Seeder
 {
@@ -13,12 +14,14 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
+        
     	for ($i = 0; $i < 100; $i++) { 
     		DB::table('books')->insert([
-            'title' => 'Book #'. $i,
-            'author' => 'Author #' . $i,
-            'year' => $i*$i,
-            'genre' => 'genre '.$i
+            'title' => 'Book'.$faker->word,
+            'author' => $faker->lastName,
+            'year' => $faker->year,
+            'genre' => 'genre '
         ]); 
     	}
     	

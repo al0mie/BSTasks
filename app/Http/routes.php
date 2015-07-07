@@ -10,7 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-
-
+Route::get('book/drop/{id}', 'BookController@drop');
+Route::get('user/add_book/{id}', 'UserController@add_book');
+Route::post('user/save_book/{id}', 'UserController@save_book');
 Route::resource('user', 'UserController');
+Route::resource('book', 'BookController');

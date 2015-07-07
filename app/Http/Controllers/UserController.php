@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Input;
 use Illuminate\Support\Facades\Validator; 
-
 use App\User;
-
+use App\Book;
+use DB;
 
 class UserController extends Controller
 {
@@ -22,8 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-       
+        $users = User::paginate(10);
+     
         return view('user.index', array('users' => $users));
     }
 
@@ -42,36 +41,38 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function store(Requests $request)
+    public function store(Request $request)
     {
-        dd($request);
-
         $validator = Validator::make($request::all(), User::$rules);
-
+        $req = $request::all();
+   
         if($validator->fails()){
-            return Redirect::to('users.create')
+            return Redirect::to('user.create')
                             ->withErrors($validator)
                             ->withInput();
         }
-
+        
         $user = new User();
-        $user->firstname = $request->firstname;
-        $user->lastname = $request->lastname;
-        $user->email = $request->email;
+        $user->firstname = $req['firstname'];
+        $user->lastname = $req['lastname'];
+        $user->email = $req['email'];
         $user->save();
         Session::flash('message', 'Succefully created user');
-        return Redirect::to('users');
+        return Redirect::to('user');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.  
      *
      * @param  int  $id
      * @return Response
      */
     public function show($id)
-    {
-      
+    { 
+        $user = User::find($id);
+        $books = $user->books;
+        return view('user.show_books', array('books' => $books, 'user'=>$user));
+
     }
 
     /**
@@ -83,7 +84,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('user.edit', array('user'=>$user));
+        return view('user.edit', array('user' => $user));
     }
 
     /**
@@ -92,21 +93,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
+        $req = $request::all();
+        $rules = User::$rules;
+        $rules['email'] .= $id;  //required to pass validation for unique on own data
+        $validator = Validator::make($request::all(), $rules);
+ 
         if($validator->fails()){
-            return Redirect::to('users.create')
+              return Redirect::to('user/'.$id.'/edit')
                             ->withErrors($validator)
                             ->withInput();
         }
 
         $user = User::find($id);
-        $user->firstname = $req->firstname;
-        $user->lastname = $req->lastname;
-        $user->email = $req->email;
+        $user->firstname = $req['firstname'];
+        $user->lastname = $req['lastname'];
+        $user->email = $req['email'];
         $user->save();
         Session::flash('message', 'Succefully updated user');
-        return Redirect::to('users');
+        return Redirect::to('user');
     }
 
     /**
@@ -116,10 +122,37 @@ class UserController extends Controller
      * @return Response
      */
     public function destroy($id)
-    {
+    {   
         $user = User::find($id);
         $user->delete();
         Session::flash('message', 'Succefully deleted user with id' . $user->id);
-        return Redirect::to('users');
+        return Redirect::to('user');
     }
+
+    /**
+     * Call form for adding a book from not engaged book list
+     *
+     * @param int $id 
+     */
+    public function add_book($id)
+    {  
+        $user = User::find($id);
+        $books = DB::table('books')->whereNull('user_id')->lists('title','id');    
+        return view('user.add_book', array('user' => $user,  'books' => $books));
+    }   
+
+    /**
+     * Call to save data 
+     *
+     * @param $id 
+    */
+    public function save_book($id)
+    {    
+        $req = Input::all();
+        $book = Book::find($req['owner']);
+        $book->user()->associate(User::find($id));
+        $book->save();
+        Session::flash('message', 'Succefully added book to user #'.$id);
+        return Redirect::to('user');
+    } 
 }

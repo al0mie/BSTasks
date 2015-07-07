@@ -18,10 +18,10 @@ class BooksTableSeeder extends Seeder
         
     	for ($i = 0; $i < 100; $i++) { 
     		DB::table('books')->insert([
-            'title' => 'Book'.$faker->word,
-            'author' => $faker->lastName,
-            'year' => $faker->year,
-            'genre' => 'genre '
+                'title' => 'Book'.$faker->word,
+                'author' => $faker->lastName,
+                'year' => $faker->year,
+                'genre' => 'genre '
         ]); 
     	}
     	

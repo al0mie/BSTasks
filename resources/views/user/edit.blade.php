@@ -26,6 +26,6 @@
 	</div>
 
 	{!! Form::submit('Save', array('class' => 'btn btn-small btn-primary')) !!}
-	<a class = "btn btn-small btn-primary" href="{{ URL::to('user/')}}">Go back</a>
+		<a class = "btn btn-small btn-primary" href="{{ URL::to('user/')}}">Go back</a>
 	{!! Form::close() !!}
 @stop

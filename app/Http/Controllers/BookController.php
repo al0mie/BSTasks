@@ -11,6 +11,11 @@ use App\Book;
 use App\User;
 use DB;
 
+/**
+ * Controller for entity of book
+ *
+ * @author Aleksandr Mokrenko <alex.mokrencko@yandex.ru>
+ */
 class BookController extends Controller
 {
    /**

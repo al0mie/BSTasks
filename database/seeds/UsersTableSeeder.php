@@ -15,8 +15,7 @@ class UsersTableSeeder extends Seeder
        $faker = Faker::create();
 
        for ($i = 0; $i < 100; $i++) { 
-        echo $faker->word;
-    		DB::table('users')->insert([
+        DB::table('users')->insert([
             'firstname' => $faker->firstName,
             'lastname' => $faker->lastName,
             'email' => $faker->email,

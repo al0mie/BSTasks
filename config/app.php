@@ -137,15 +137,14 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        Illuminate\Html\HtmlServiceProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Jelovac\Bitly4laravel\Bitly4laravelServiceProvider::class
-
+        
     ],
 
     /*
@@ -193,7 +192,9 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Bitly' => 'Jelovac\Bitly4laravel\Facades\Bitly4laravel'
+        'HTML'      => Illuminate\Html\HtmlFacade::class,
+        'Form'      => Illuminate\Html\FormFacade::class,
+        
     ],
 
 ];

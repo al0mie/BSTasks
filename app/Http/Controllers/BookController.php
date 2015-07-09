@@ -26,7 +26,6 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::paginate(10);
-
         return view('book.index', array('books' => $books));
     }
 
@@ -47,6 +46,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $request::merge(array_map('trim', $request::all()));  //delete spaces
         $validator = Validator::make($request::all(), Book::$rules);
 
         $req = $request::all();
@@ -87,7 +87,7 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        $users = DB::table('users')->lists('email','id'); 
+        $users = DB::table('users')->distinct()->lists('email','id'); 
         return view('book.edit', array('book' => $book, 'users'=> $users));
     }
 
@@ -99,6 +99,7 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request::merge(array_map('trim', $request::all()));  //delete spaces
         $validator = Validator::make($request::all(), Book::$rules);
         $req = $request::all();
        
@@ -129,12 +130,20 @@ class BookController extends Controller
     {   
         $book = Book::find($id);
         $book->delete();
-        Session::flash('message', 'Succefully deleted book with id' . $book->id);
+        Session::flash('message', 'Succefully deleted book with id #' . $book->id);
         return Redirect::to('book');
     }
     
+    /**
+     * Remove assiciation from book
+     *
+     * @param int $id 
+     *
+     * @return Redirect 
+     */
     public function drop($id)
-    {  $book = Book::find($id);
+    {  
+       $book = Book::find($id);
        $book->user()->dissociate();
        $book->save();
        return Redirect::back();

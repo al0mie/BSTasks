@@ -12,6 +12,9 @@ use App\User;
 use App\Book;
 use DB;
 
+/**
+ * Controller for entity for  user
+ */
 class UserController extends Controller
 {
     /**
@@ -22,7 +25,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-     
         return view('user.index', array('users' => $users));
     }
 
@@ -42,7 +44,8 @@ class UserController extends Controller
      * @return Response
      */
     public function store(Request $request)
-    {
+    {   
+        $request::merge(array_map('trim', $request::all()));  //delete spaces
         $validator = Validator::make($request::all(), User::$rules);
         $req = $request::all();
    
@@ -94,7 +97,8 @@ class UserController extends Controller
      * @return Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $request::merge(array_map('trim', $request::all()));  //delete spaces
         $req = $request::all();
         $rules = User::$rules;
         $rules['email'] .= $id;  //required to pass validation for unique on own data
@@ -125,7 +129,7 @@ class UserController extends Controller
     {   
         $user = User::find($id);
         $user->delete();
-        Session::flash('message', 'Succefully deleted user with id' . $user->id);
+        Session::flash('message', 'Succefully deleted user with id #' . $user->id);
         return Redirect::to('user');
     }
 
@@ -137,7 +141,7 @@ class UserController extends Controller
     public function add_book($id)
     {  
         $user = User::find($id);
-        $books = DB::table('books')->whereNull('user_id')->lists('title','id');    
+        $books = DB::table('books')->whereNull('user_id')->lists('title','id');
         return view('user.add_book', array('user' => $user,  'books' => $books));
     }   
 
@@ -149,7 +153,7 @@ class UserController extends Controller
     public function save_book($id)
     {    
         $req = Input::all();
-        $book = Book::find($req['owner']);
+        $book = Book::find($req['title']);
         $book->user()->associate(User::find($id));
         $book->save();
         Session::flash('message', 'Succefully added book to user #'.$id);

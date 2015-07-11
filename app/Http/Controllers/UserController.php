@@ -50,7 +50,7 @@ class UserController extends Controller
         $req = $request::all();
    
         if($validator->fails()){
-            return Redirect::to('user.create')
+            return Redirect::to('user/create')
                             ->withErrors($validator)
                             ->withInput();
         }

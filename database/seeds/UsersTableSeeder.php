@@ -19,8 +19,25 @@ class UsersTableSeeder extends Seeder
             'firstname' => $faker->firstName,
             'lastname' => $faker->lastName,
             'email' => $faker->email,
+            'password'=>Hash::make('1')
         
         ]); 
-    	}   
+    	}  
+        
+        DB::table('users')->insert([
+            'firstname' => 'Admin',
+            'lastname' => 'Admin',
+            'email' => 'alex.mokrencko@yandex.ru',
+            'password' => Hash::make('1'),
+            'admin' => '1'
+        ]); 
+
+          DB::table('users')->insert([
+            'firstname' => 'Alex',
+            'lastname' => 'ALEXI',
+            'email' => 'alex.mokrencko@gmail.com',
+            'password' => Hash::make('1'),
+            'admin' => '0'
+        ]); 
      }
 }

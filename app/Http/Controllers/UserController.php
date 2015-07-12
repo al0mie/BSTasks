@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Input;
+use Auth;
 use Illuminate\Support\Facades\Validator; 
 use App\User;
 use App\Book;
@@ -17,15 +18,25 @@ use DB;
  */
 class UserController extends Controller
 {
-    /**
+    public function __construct()
+    {
+        $this->middleware('admin', ['except' => ['index','show','getSignout', 'add_book', 'save_book']]);
+    }
+
+     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
-        return view('user.index', array('users' => $users));
+        if($request::user()->admin){
+              $users = User::paginate(10);
+              return view('user.index', array('users' => $users));
+        }
+      
+        $books = $request::user()->books()->paginate(10);
+        return redirect('/user/' . $request::user()->id);
     }
 
     /**
@@ -71,7 +82,7 @@ class UserController extends Controller
      * @return Response
      */
     public function show($id)
-    { 
+    {  
         $user = User::find($id);
         $books = $user->books;
         return view('user.show_books', array('books' => $books, 'user'=>$user));
@@ -159,4 +170,11 @@ class UserController extends Controller
         Session::flash('message', 'Succefully added book to user #'.$id);
         return Redirect::to('user');
     } 
+
+    public function getSignout()
+    {
+        Auth::logout();
+        Session::flash('message', 'Succefully sign out');
+        return Redirect::to('auth/login');
+    }
 }

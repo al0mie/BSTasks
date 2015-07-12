@@ -18,13 +18,18 @@ use DB;
  */
 class BookController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin', ['except' => ['drop']]);
+    }
    /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    { 
         $books = Book::paginate(10);
         return view('book.index', array('books' => $books));
     }

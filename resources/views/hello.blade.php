@@ -9,9 +9,9 @@
 
 <div class="container">
 	
-<p class = "text-center lead">Hello!  Here, you can choose your next action  <br>
-	<a class = "btn btn-primary btn-lg" href="{{ URL::to('user/')}}">Go to list of users</a>
-	<a class = "btn btn-primary btn-lg" href="{{ URL::to('book/')}}">Go to list of books</a>
+<p class = "text-center lead">Hello, guest!  To continue you neeed to login <br>
+	
+	<a class = "btn btn-primary btn-lg" href="{{ URL::to('auth/login')}}">Login</a>
 </p>
 </div>
 </body>

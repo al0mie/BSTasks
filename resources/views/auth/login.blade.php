@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+  {!! HTML::ul($errors->all()) !!}
   <div class="row">
     <div class="col-md-6">
     
@@ -31,6 +32,7 @@
              <div class="control-group">
               <div class="controls">
                 <button class="btn btn-success">Login</button>
+                 <a class = "btn btn-success" href="{{ URL::to('auth/register')}}">Go to registration</a>
               </div>
             </div>
           </fieldset>

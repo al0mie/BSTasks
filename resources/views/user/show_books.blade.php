@@ -3,8 +3,9 @@
 @section('pagetitle')
 
 	Book list for user {{$user->firstname .' '. $user->lastname}} 
+	@if(Auth::user()->admin)
 	<a class = "btn btn-small btn-info" href="{{ URL::to('user/add_book/' . $user->id)}}">Add a new book</a>
-
+	@endif
 @stop
 
 @section('content')
@@ -39,6 +40,7 @@
 	</tbody>
 
 </table>
-
+@if(Auth::user()->admin)
 <a class = "btn btn-small btn-success" href="{{ URL::to('user/')}}">Go back</a>
+@endif
 @stop

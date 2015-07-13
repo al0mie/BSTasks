@@ -12,6 +12,8 @@
 <p class = "text-center lead">Hello, guest!  To continue you neeed to login <br>
 	
 	<a class = "btn btn-primary btn-lg" href="{{ URL::to('auth/login')}}">Login</a>
+	<a class = "btn btn-primary btn-lg" href="{{ URL::to('auth/register')}}">Register</a>
+
 </p>
 </div>
 </body>

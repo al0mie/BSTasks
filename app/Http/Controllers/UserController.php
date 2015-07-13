@@ -20,7 +20,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin', ['except' => ['index','show','getSignout', 'add_book', 'save_book']]);
+        $this->middleware('admin', ['except' => ['index','show','getSignout']]);
     }
 
      /**

@@ -11,7 +11,7 @@
 |
 *
 */
-
+use Illuminate\Support\Facades\Mail;
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
@@ -23,7 +23,12 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
-
+Route::get('mail/queue', function() {
+	Mail::queue('emails.welcome', ['name' => 'Novica'], function($message) {
+		$message->to('alex.mokrencko@yandex.ru', 'Alexkrenko')->subject('Welcom');
+	});
+	return 'this will be send ';
+});
 Route::get('home/', 'UserController@index');
 Route::get('login/{provider?}', 'Auth\AuthController@login');
 Route::get('/user/signout', 'UserController@getSignout');

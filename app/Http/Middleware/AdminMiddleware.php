@@ -15,15 +15,11 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-
-        if(auth()->user()->admin == 1)
-        {
-            return $next($request);
-        }
-        else
-        {   
-        return view('auth.login')->withErrors('You are not logged in');
+        if (!(auth()->user()) || auth()->user()->admin != 1) {   
+            return view('auth.login')->withErrors('You are not logged in');
         }
 
+        else return $next($request);
+        
     }
 }

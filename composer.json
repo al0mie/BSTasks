@@ -10,7 +10,8 @@
         "jelovac/bitly4laravel": "^3.1",
         "fzaninotto/faker": "^1.5",
         "illuminate/html": "^5.0",
-        "laravel/socialite": "^2.0"
+        "laravel/socialite": "^2.0",
+        "iron-io/iron_mq": "2.*"
         
     },
     "require-dev": {

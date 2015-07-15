@@ -166,6 +166,8 @@ class UserController extends Controller
         $req = Input::all();
         $book = Book::find($req['title']);
         $book->user()->associate(User::find($id));
+        $job = (new SendEmailForReminde($book))->onQueue('emails')->delay('2592000');
+        $this->dispatch($job);
         $book->save();
         Session::flash('message', 'Succefully added book to user #'.$id);
         return Redirect::to('user');

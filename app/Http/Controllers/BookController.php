@@ -68,6 +68,8 @@ class BookController extends Controller
         $book->year = $req['year'];
         $book->genre = $req['genre'];
         $book->save();
+        $job = (new SendEmailForNotification($book))->onQueue('emails');
+        $this->dispatch($job);
         Session::flash('message', 'Succefully created book');
         return Redirect::to('book');
     }

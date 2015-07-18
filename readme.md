@@ -1,4 +1,4 @@
-This is a branch for the third task from BS Academy.<br>
+For listening task you need run: php artisan queue:listen<br>
 Initial data to login as admin or usual user you can find in /database/seeds/UserTableSeeders.php<br>
 To install project:<br>
 1) run cmd and enter: composer install <br>

@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    public $fillable = ['firstname', 'lastname', 'email', 'provider_id'];
+    public $fillable = ['firstname', 'lastname', 'email'];
 
     public static $rules = array(
         'firstname'=>'required|min:2|alpha',
@@ -33,8 +33,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
    );
 
 
-   public function books() {
-        return $this->hasMany('App\Book');
+    public function books() {
+        return $this->belongsToMany('App\Book')
+                    ->withPivot('date_booking', 'date_return');
     }
 
     /**

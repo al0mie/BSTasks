@@ -32,7 +32,10 @@
 			<td> {{ $book->year }}</td>
 			<td> {{ $book->genre }}</td>
 			<td width="150">
-				<a class = "btn btn-small btn-danger" href="{{ URL::to('book/drop/' . $book->id)}}">Drop</a>
+			{!! Form::open(array('url' => 'book/drop/' . $book->id , 'method' => 'get')) !!}
+			{!! Form::hidden('id', $user->id) !!}
+			{!! Form::submit('Dop', array('class' => 'btn btn-warning')) !!}
+			{!! Form::close() !!}
 			</td>
 		</tr>
 	@endforeach

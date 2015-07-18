@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Jobs\Job;
 use App\Book;
 use App\User;
+use Mail;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -30,10 +31,8 @@ class SendEmailForNotification extends Job implements SelfHandling, ShouldQueue
    /**
     * Execute the job.
     *
-    * @param  Mailer  $mailer
-    * @return void
     */
-    public function handle(Mailer $mailer) {
+    public function handle() {
         $users = User::all();
         foreach ($users as $user) {
             $data = array('firstname' => $user->firstname, 
@@ -42,11 +41,11 @@ class SendEmailForNotification extends Job implements SelfHandling, ShouldQueue
                           'book_author' => $this->book['author'],
                           'book_year' => $this->book['year'],
                           'book_genre' =>$this->book['genre']);
-
-            $mailer->queue('emails.notification_new_book', $data, function ($message) use ($data) {
-                $message->to($data['email'], '')
+            Mail::send('emails.notification_new_book', $data, function ($message) use ($data) {
+                $message->to($data['email'], $data['firstname'])
                     ->subject('New book was added!');
             });
         }
     }
 }
+

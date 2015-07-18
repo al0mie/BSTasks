@@ -26,7 +26,6 @@ Route::get('home/', 'UserController@index');
 Route::get('login/{provider?}', 'Auth\AuthController@login');
 Route::get('/user/signout', 'UserController@getSignout');
 Route::get('book/drop/{id}', 'BookController@drop');
-Route::get('book/drop/{id}', 'BookController@drop');
 Route::get('user/add_book/{id}', 'UserController@add_book');
 Route::post('user/save_book/{id}', 'UserController@save_book');
 

@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Input;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator; 
 use App\User;
 use App\Book;
 use DB;
+use App\Jobs\SendEmailForReminde;
 
 /**
  * Controller for entity for  user
@@ -61,7 +63,7 @@ class UserController extends Controller
         $req = $request::all();
    
         if($validator->fails()){
-            return Redirect::to('user.create')
+            return Redirect::to('user/create')
                             ->withErrors($validator)
                             ->withInput();
         }
@@ -82,8 +84,7 @@ class UserController extends Controller
      * @return Response
      */
     public function show($id)
-    {  
-        $user = User::find($id);
+    {   $user = User::find($id);
         $books = $user->books;
         return view('user.show_books', array('books' => $books, 'user'=>$user));
 
@@ -152,7 +153,7 @@ class UserController extends Controller
     public function add_book($id)
     {  
         $user = User::find($id);
-        $books = DB::table('books')->whereNull('user_id')->lists('title','id');
+        $books = DB::table('books')->lists('title','id');
         return view('user.add_book', array('user' => $user,  'books' => $books));
     }   
 
@@ -162,13 +163,14 @@ class UserController extends Controller
      * @param $id 
     */
     public function save_book($id)
-    {    
+    {      
         $req = Input::all();
         $book = Book::find($req['title']);
-        $book->user()->associate(User::find($id));
-        $job = (new SendEmailForReminde($book))->onQueue('emails')->delay('2592000');
+        $user = User::find($id);
+        $user->books()->attach($book->id, ['date_booking' => Carbon::now()]);
+        $user->save();
+        $job = (new SendEmailForReminde($user, $book))->delay('2592000'); //set mounth in seconds
         $this->dispatch($job);
-        $book->save();
         Session::flash('message', 'Succefully added book to user #'.$id);
         return Redirect::to('user');
     } 

@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator; 
 use App\Book;
+use Input;
 use App\User;
 use DB;
+use Carbon\Carbon;
+use App\Jobs\SendEmailForNotification;
 
 /**
  * Controller for entity of book
@@ -68,7 +71,8 @@ class BookController extends Controller
         $book->year = $req['year'];
         $book->genre = $req['genre'];
         $book->save();
-        $job = (new SendEmailForNotification($book))->onQueue('emails');
+        $users = User::all();
+        $job = (new SendEmailForNotification($book, $user));
         $this->dispatch($job);
         Session::flash('message', 'Succefully created book');
         return Redirect::to('book');
@@ -94,8 +98,7 @@ class BookController extends Controller
     public function edit($id)
     {
         $book = Book::find($id);
-        $users = DB::table('users')->distinct()->lists('email','id'); 
-        return view('book.edit', array('book' => $book, 'users'=> $users));
+        return view('book.edit', array('book' => $book));
     }
 
     /**
@@ -121,7 +124,6 @@ class BookController extends Controller
         $book->author = $req['author'];
         $book->year = $req['year'];
         $book->genre = $req['genre'];
-        $book->user()->associate(User::find($req['owner']));
         $book->save();
         Session::flash('message', 'Succefully updated book');
         return Redirect::to('book');
@@ -150,9 +152,8 @@ class BookController extends Controller
      */
     public function drop($id)
     {  
-       $book = Book::find($id);
-       $book->user()->dissociate();
-       $book->save();
-       return Redirect::back();
+        $user = User::find(Input::get('id'));
+        $user->books()->detach($id);
+        return Redirect::back();
     }
 }

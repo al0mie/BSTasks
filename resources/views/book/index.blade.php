@@ -14,7 +14,6 @@
 			<td>Author</td>
 			<td>Year</td>
 			<td>Genre</td>
-			<td>Owner</td>
 			<td>Actions</td>
 		</tr>
 	</thead>
@@ -28,9 +27,8 @@
 			<td> {{ $book->author }}</td>
 			<td> {{ $book->year }}</td>
 			<td> {{ $book->genre }}</td>
-			<td> {{ $book->user['firstname'] ." ".  $book->user['lastname']}}</td>
-			<td width="250">
-				<a class = "btn btn-small btn-success" href="{{ URL::to('book/drop/' . $book->id)}}">Drop owner</a>
+			
+			<td width="200">
 				<a class = "btn btn-small btn-info" href="{{ URL::to('book/' . $book->id.'/edit')}}">Edit</a>
 			{!! Form::open(array('url' => 'book/' . $book->id, 'class' => 'pull-right')) !!}
 			{!! Form::hidden('_method', 'DELETE') !!}

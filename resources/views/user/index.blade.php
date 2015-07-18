@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('pagetitle')
-General user list
+	General user list
 @stop
 
 @section('content')

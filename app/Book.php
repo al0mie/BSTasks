@@ -28,8 +28,9 @@ class Book extends Model
         'genre'=>'required|min:2|alpha',
    );
 
-    public function user()
+    public function users()
     {
-       return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User')
+                    ->withPivot('date_booking', 'date_return');
     }   
 }

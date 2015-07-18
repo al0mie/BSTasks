@@ -24,16 +24,7 @@ class CreateUsersTable extends Migration
             
             
         });
-
-        Schema::table('books', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('cascade');
-        });
     }
-      
-    
 
     /**
      * Reverse the migrations.

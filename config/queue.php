@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => 'database',
+    'default' => env('QUEUE_DRIVER', 'sync'),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,9 +60,9 @@ return [
         'iron' => [
             'driver'  => 'iron',
             'host'    => 'mq-aws-us-east-1.iron.io',
-            'token'   => 'SIDyESXaESAdfcjGvCV82yxgthI',
-            'project' => 'BSTasks',
-            'queue'   => 'laravel',
+            'token'   => 'your-token',
+            'project' => 'your-project-id',
+            'queue'   => 'your-queue-name',
             'encrypt' => true,
         ],
 

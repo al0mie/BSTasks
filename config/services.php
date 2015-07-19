@@ -20,7 +20,7 @@ return [
     ],
 
     'mandrill' => [
-        'secret' => 'cTjBSP23ZEDazCR6derJaA',
+        'secret' => '',
     ],
 
     'ses' => [
@@ -34,11 +34,5 @@ return [
         'key'    => '',
         'secret' => '',
     ],
-
-    'facebook' => [
-        'client_id' => '1603975046552450',
-        'client_secret' => 'eb5667d0cc4711e75af563755d8fc420',
-        'redirect' => 'http://localhost:8000/login',
-],
 
 ];

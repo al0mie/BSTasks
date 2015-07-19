@@ -18,25 +18,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'users';
-    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    public $fillable = ['firstname', 'lastname', 'email'];
-
-    public static $rules = array(
-        'firstname'=>'required|min:2|alpha',
-        'lastname'=>'required|min:2|alpha',
-        'email'=>'required|email|unique:users,email,',
-   );
-
-
-    public function books() {
-        return $this->belongsToMany('App\Book')
-                    ->withPivot('date_booking', 'date_return');
-    }
+    protected $fillable = ['name', 'email', 'password'];
 
     /**
      * The attributes excluded from the model's JSON form.

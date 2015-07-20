@@ -12,7 +12,13 @@ class CreateGoalsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('goals', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->string('type');
+            $table->integer('status_id')->unsigned()->nullable();
+ 
+        });
     }
 
     /**
@@ -22,6 +28,6 @@ class CreateGoalsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('goals');
     }
 }

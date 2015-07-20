@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStaffTable extends Migration
+class CreateMissionstatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,12 @@ class CreateStaffTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('missionstatus', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->string('status');
+ 
+        });;
     }
 
     /**
@@ -22,6 +27,6 @@ class CreateStaffTable extends Migration
      */
     public function down()
     {
-        //
+         Schema::drop('missionstatus');
     }
 }

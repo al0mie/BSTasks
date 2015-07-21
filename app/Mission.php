@@ -27,4 +27,9 @@ class Mission extends Model
     public function members() {
         return $this->belongsToMany('App\Member');
     }   
+
+    public function goals()
+    {
+        return $this->hasMany('App\Goal');
+    }
 }

@@ -24,5 +24,12 @@ class Goal extends Model
     public function status() {
         return $this->belongsTo('App\GoalStatus');
     }   
+
+    public function mission()
+    {
+        return $this->belongsTo('App\Mission');
+    }
+
+
    
 }

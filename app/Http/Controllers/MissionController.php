@@ -100,6 +100,11 @@ class MissionController extends Controller
         $mission = Mission::find($id);
         $member = Member::find($request->id);
         $mission->members()->attach($member->id);
+
+        return response()->json([
+            'msg' => 'Success',
+            ], 200
+        );
     }
 
     public function addGoal(Request $request, $id)
@@ -107,8 +112,37 @@ class MissionController extends Controller
         $mission = Mission::find($id);
         $goal = Goal::find($request->id);
         $goal->mission()->associate($mission);
+
+        return response()->json([
+            'msg' => 'Success',
+            ], 200
+        );
     }
 
-    
+    public function changeStatus(Request $request, $id)
+    {
+        $mission = Mission::find($id);
+        $status = MissionStatus::find($request->id);
+
+        if ($status->status == 'achieved' || $status->status == 'cancelled') {
+            foreach ($mission->members as $member) {
+                $mission->members()->detach($member->id);
+            }
+            if ($status->status == 'cancelled') {
+                foreach ($mission->goals as $goal) {
+                    $goal->mission()->dissociate();
+                }  
+            }
+        }
+
+        $mission->status()->associate($status);
+
+        return response()->json([
+            'msg' => 'Success',
+            ], 200
+        );
+    }
+
+
 
 }

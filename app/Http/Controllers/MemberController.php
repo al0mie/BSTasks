@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mission;
-use App\MissionStatus;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Member;
 
-class MissionController extends Controller
+class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +17,14 @@ class MissionController extends Controller
      */
     public function index()
     {
-        $missions = Mission::get();
+         
+        $members = Member::get();
     
         return response()->json([
             'msg' => 'Success',
-            'missions'=> $missions->toArray()
+            'member'=> $member->toArray()
             ], 200
         );
-        
     }
 
     /**
@@ -34,16 +34,15 @@ class MissionController extends Controller
      * @return Response
      */
     public function store(Request $request)
-    {   
-        $mission = new Mission();
-        $mission->name = 'Apollo';
-        $missionStatus = MissionStatus::find(1);
-        $mission->status()->associate($missionStatus);
-        $mission->save();
+    {
+        $member = new Member();
+        $member->name = $request->name;
+        $member->position = $request->position;
+        $member->save();
 
         return response()->json([
             'msg' => 'Success',
-            'missions'=> $mission,
+            'member'=> $member,
             ], 200
         );
     }
@@ -56,11 +55,11 @@ class MissionController extends Controller
      */
     public function show($id)
     {
-        $mission = Mission::find($id);
+        $member = Member::find($id);
 
         return response()->json([
             'msg' => 'Success',
-            'mission'=>$mission
+            'member'=>$member,
             ], 200
         );
     }
@@ -74,7 +73,17 @@ class MissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $member = Member::find($id);
+        $member->name = $request->name;
+        $member->position = $request->position;
+        $member->save();
+
+        return response()->json([
+            'msg' => 'Success',
+            'member'=>$member,
+            ], 200
+        );
+
     }
 
     /**
@@ -85,30 +94,12 @@ class MissionController extends Controller
      */
     public function destroy($id)
     {
-        $mission = Mission::find($id);
-        $mission->delete();
+        $member = Member::find($id);
+        $member->delete();
 
         return response()->json([
             'msg' => 'Success',
             ], 200
         );
     }
-
-
-    public function addMember(Request $request, $id)
-    {
-        $mission = Mission::find($id);
-        $member = Member::find($request->id);
-        $mission->members()->attach($member->id);
-    }
-
-    public function addGoal(Request $request, $id)
-    {
-        $mission = Mission::find($id);
-        $goal = Goal::find($request->id);
-        $goal->mission()->associate($mission);
-    }
-
-    
-
 }

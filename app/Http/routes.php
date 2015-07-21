@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('mission', 'MissionController');
+Route::resource('member', 'MemberController');
+Route::resource('goal', 'GoalController');

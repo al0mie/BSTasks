@@ -21,7 +21,7 @@ class MemberController extends Controller
         $members = Member::get();
     
         return response()->json([
-            'msg' => 'Success',
+            'Message' => 'Success',
             'member'=> $member->toArray()
             ], 200
         );
@@ -36,12 +36,19 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $member = new Member();
+
+        $validator = Validator::make($request->all(), Member::$rules);
+        
+        if ($validator->fails()) {
+            return response()->json([$validator->rules()], 500);
+        }
+
         $member->name = $request->name;
         $member->position = $request->position;
         $member->save();
 
         return response()->json([
-            'msg' => 'Success',
+            'Message' => 'Success',
             'member'=> $member,
             ], 200
         );
@@ -55,10 +62,16 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        $member = Member::find($id);
-
+        try {
+            $member = Member::find($id);
+        } catch (Exception $ex) {
+            return response()->json([
+              'Message' => 'Fail',
+            ], 404
+        );
+        }
         return response()->json([
-            'msg' => 'Success',
+            'Message' => 'Success',
             'member'=>$member,
             ], 200
         );
@@ -73,16 +86,23 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $member = Member::find($id);
-        $member->name = $request->name;
-        $member->position = $request->position;
-        $member->save();
+        try {
+            $member = Member::find($id);
+            $member->name = $request->name;
+            $member->position = $request->position;
+            $member->save();
 
-        return response()->json([
-            'msg' => 'Success',
-            'member'=>$member,
-            ], 200
-        );
+            return response()->json([
+                'Message' => 'Success',
+                'member'=>$member,
+                ], 200
+            );
+        catch (Exception $ex) {
+             return response()->json([
+                'Message' => 'Fail',
+                ], 500
+            );
+        }
 
     }
 
@@ -98,7 +118,7 @@ class MemberController extends Controller
         $member->delete();
 
         return response()->json([
-            'msg' => 'Success',
+            'Message' => 'Success',
             ], 200
         );
     }

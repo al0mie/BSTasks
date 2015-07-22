@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Goal;
+use App\Status;
 
 class GoalController extends Controller
 {
@@ -19,7 +20,7 @@ class GoalController extends Controller
         $goals = Goal::get();
     
         return response()->json([
-            'msg' => 'Success',
+            'Message' => 'Success',
             'goals'=> $goals->toArray()
             ], 200
         );
@@ -34,6 +35,13 @@ class GoalController extends Controller
     public function store(Request $request)
     {
         $goal = new Goal();
+
+        $validator = Validator::make($request->all(), Goal::$rules);
+        
+        if ($validator->fails()) {
+            return response()->json([$validator->rules()], 500);
+        }
+
         $goal->type = $request->type;
         $goal->position = $request->position;
         $goalStatus = GoalStatus::find(1);
@@ -41,7 +49,7 @@ class GoalController extends Controller
         $goal->save();
 
         return response()->json([
-            'msg' => 'Success',
+            'Message' => 'Success',
             'goal'=> $goal,
             ], 200
         );
@@ -54,11 +62,15 @@ class GoalController extends Controller
      * @return Response
      */
     public function show($id)
-    {
-        $goal = Goal::find($id);
-
+    {   try {
+            $goal = Goal::find($id);
+        } catch (Exception $ex) {
+            return  return response()->json([
+                'Message' => 'Fail',
+            ], 200);
+        }
         return response()->json([
-            'msg' => 'Success',
+            'Message' => 'Success',
             'goal'=>$goal,
             ], 200
         );
@@ -72,8 +84,22 @@ class GoalController extends Controller
      * @return Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   try {
+            $goal = Goal::find($id);
+            $goal->type = $request->type;
+            $status = Status::find($request->status_id);
+            $goal->status = $status->status;
+            $goal->save();
+            return response()->json([
+                'Message' => 'Success',
+                'goal'=>$member,
+                ], 200);
+
+        } catch (Exception $ex) {
+             return response()->json([
+                'Message' => 'Fail',
+                ], 500
+            );
     }
 
     /**
@@ -88,7 +114,7 @@ class GoalController extends Controller
         $goal->delete();
 
         return response()->json([
-            'msg' => 'Success',
+            'Message' => 'Success',
             ], 200
         );
     }

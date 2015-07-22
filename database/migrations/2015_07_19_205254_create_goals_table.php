@@ -16,8 +16,8 @@ class CreateGoalsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('type');
-            $table->integer('status_id')->unsigned()->nullable();
- 
+            $table->string('status');
+            $table->integer('mission_id')->unsigned()->nullable();
         });
     }
 

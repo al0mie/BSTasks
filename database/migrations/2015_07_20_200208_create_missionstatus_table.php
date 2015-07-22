@@ -12,7 +12,7 @@ class CreateMissionstatusTable extends Migration
      */
     public function up()
     {
-        Schema::create('missionstatus', function (Blueprint $table) {
+        Schema::create('status', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('status');
@@ -27,6 +27,6 @@ class CreateMissionstatusTable extends Migration
      */
     public function down()
     {
-         Schema::drop('missionstatus');
+         Schema::drop('status');
     }
 }

@@ -20,9 +20,10 @@ class Mission extends Model
      */
     protected $fillable = ['name', 'status'];
 
-    public function status() {
-        return $this->belongsTo('App\MissionStatus');
-    }   
+    public static $rules = array(
+        'name'=>'required|min:2',
+    );
+
 
     public function members() {
         return $this->belongsToMany('App\Member');

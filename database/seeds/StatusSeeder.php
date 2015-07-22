@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MissionStatusSeeder extends Seeder
+class GoalStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,17 +11,18 @@ class MissionStatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('missionstatus')->insert([
+        DB::table('status')->insert([
             'status' => 'planned',
         ]); 
-        DB::table('missionstatus')->insert([
+         DB::table('goalstatus')->insert([
             'status' => 'in progress',
         ]); 
-        DB::table('missionstatus')->insert([
-            'status' => 'achieved',
+          DB::table('goalstatus')->insert([
+            'status' => 'completed',
         ]); 
-        DB::table('missionstatus')->insert([
+           DB::table('goalstatus')->insert([
             'status' => 'cancelled',
         ]); 
+
     }
 }

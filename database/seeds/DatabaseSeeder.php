@@ -14,12 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(MissionStatusSeeder::class);
+        $this->call(StatusSeeder::class);
         $this->command->info("Mission status table seeded :)");
         
-        $this->call(GoalStatusSeeder::class);
-        $this->command->info("Goal status table seeded :)");
-
         Model::reguard();
     }
 }

@@ -16,7 +16,7 @@ class CreateMissionsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
-            $table->integer('status_id')->unsigned()->nullable();
+            $table->string('status');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateMissionsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('missions');
     }
 }

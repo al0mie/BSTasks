@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GoalStatus extends Model
+class Status extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'goalstatus';
+    protected $table = 'status';
     public $timestamps = false;
     /**
      * The attributes that are mass assignable.
@@ -19,8 +19,5 @@ class GoalStatus extends Model
      * @var array
      */
     protected $fillable = ['status'];
-
-    public function status() {
-        return $this->hasMany('App\Goal');
-    }   
+ 
 }

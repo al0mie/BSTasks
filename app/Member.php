@@ -13,6 +13,13 @@ class Member extends Model
      */
     protected $table = 'members';
     public $timestamps = false;
+
+    public static $rules = array(
+        'name'=>'required|min:2|alpha',
+        'name'=>'required|min:2|alpha',
+    );
+
+
     /**
      * The attributes that are mass assignable.
      *

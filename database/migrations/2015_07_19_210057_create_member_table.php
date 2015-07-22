@@ -12,13 +12,12 @@ class CreateMemberTable extends Migration
      */
     public function up()
     {
-      Schema::create('members', function (Blueprint $table) {
+        Schema::create('members', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
             $table->string('position');
- 
-        });;
+        });
     }
 
     /**

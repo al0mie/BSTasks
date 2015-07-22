@@ -12,15 +12,10 @@ class CreateForeignKeysTable extends Migration
      */
     public function up()
     {
-        Schema::table('missions', function (Blueprint $table) {
-            $table->foreign('status_id')->references('id')
-                                      ->on('missionstatus')
-                                      ->onDelete('cascade');
-        });
-
         Schema::table('goals', function (Blueprint $table) {
-            $table->foreign('status_id')->references('id')
-                                      ->on('goalstatus')
+
+            $table->foreign('mission_id')->references('id')
+                                      ->on('missions')
                                       ->onDelete('cascade');
         });
     }

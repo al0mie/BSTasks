@@ -18,8 +18,11 @@ class Goal extends Model
      *
      * @var array
      */
-    protected $fillable = ['type'];
- 
+    protected $fillable = ['type', 'status'];
+    
+    public static $rules = array(
+        'type'=>'required|min:2',
+    );
 
     public function status() {
         return $this->belongsTo('App\GoalStatus');

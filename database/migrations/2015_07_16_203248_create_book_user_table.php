@@ -23,12 +23,10 @@ class CreateBookUserTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('book_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')
-                                      ->on('users')
-                                      ->onDelete('cascade');
+                                      ->on('users');
 
             $table->foreign('book_id')->references('id')
-                                      ->on('books')
-                                      ->onDelete('cascade');
+                                      ->on('books');
         });
     }
     /**

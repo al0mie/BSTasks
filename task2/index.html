@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TODO List</title>
+	<link rel="stylesheet" href="./resources/css/style.css">
+</head>
+<body>
+	<section id="todo-container">
+		<input type="text" id="createTask" placeholder="Enter text" data-keypress-action="addTask" autofocus>
+		<input type="checkbox" id="checkAll" data-click-action="checkAll">
+		<ul id="toDoList"></ul>
+		<input type="button" id="clearChecked" value="X" data-click-action="clearChecked">
+	</section>
+
+	<script src="./resources/js/jquery.min.js"></script>
+	<script src="./resources/js/main.js"></script>
+	<script>
+		Application.init();
+	</script>
+</body>
+</html>

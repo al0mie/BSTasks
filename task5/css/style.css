@@ -1,0 +1,265 @@
+* {
+    font-family: 'Roboto', 'Galada', cursive;
+    color: black !important;
+}
+
+body {
+    padding-top: 70px;
+    background: url("http://wallpapercave.com/wp/sdYNAzo.jpg");
+}
+
+.navbar {
+    background: darkseagreen;
+}
+
+.slide-image {
+    width: 100%;
+}
+
+.list-group {
+    margin-left: 0%;
+}
+
+.carousel-holder {
+    margin-bottom: 30px;
+}
+
+.slide-image {
+    max-height: 450px;
+}
+
+.carousel-inner {
+    max-height: 450px;
+}
+
+.carousel-control,
+.item {
+    border-radius: 4px;
+}
+
+.desc {
+    margin: 5px;
+    text-align: justify;
+}
+
+.caption {
+    height: 230px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.detail img {
+    width: 100%;
+    height: 350px;
+}
+
+.detail {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.detail {
+    padding: 0;
+    border: none;
+}
+
+.detail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+@media all and (max-width: 990px) {
+    .ratings {
+        display: none;
+    }
+
+    .price {
+        display: none;
+    }
+
+    .caption {
+        height: 400px;
+    }
+
+    .detail img {
+        height: 300px;
+    }
+}
+
+@media all and (max-width: 770px) {
+    .ratings {
+        display: block;
+    }
+
+    .price {
+        display: block;
+    }
+
+    .caption {
+        height: 250px;
+        margin: 10px;
+    }
+
+    .detail img {
+        height: 250px;
+        width: 250px;
+    }
+
+}
+
+footer {
+    margin: 50px 0;
+}
+
+/* -------------- Sidebar ------------- */
+.mini-submenu {
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    border-radius: 4px;
+    padding: 9px;
+    width: 42px;
+}
+
+.list-group-item:first-child {
+    background: darkseagreen;
+    margin: 0;
+    padding: 10px;
+    border: none;
+    text-align: center;
+}
+
+.mini-submenu:hover {
+    cursor: pointer;
+}
+
+.mini-submenu .icon-bar {
+    border-radius: 1px;
+    display: block;
+    height: 2px;
+    width: 22px;
+    margin-top: 3px;
+}
+
+.mini-submenu .icon-bar {
+    background-color: #000;
+}
+
+#slide-submenu {
+    background: rgba(0, 0, 0, 0.45);
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ------------ Animation ------- */
+.detail {
+    transition: background-color 1s ease;
+    background-color: forestgreen;
+}
+
+.detail:hover {
+    background: darkgreen;
+}
+
+/* -------------- Spinner ------------- */
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinner {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    position: relative;
+    min-width: 30px;
+    min-height: 30px;
+}
+
+.spinner:before {
+    content: 'Loading…';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-top: -13px;
+    margin-left: -13px;
+}
+
+.spinner:not(:required):before {
+    content: '';
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    border-top-color: #03ade0;
+    animation: spinner .6s linear infinite;
+    -webkit-animation: spinner .6s linear infinite;
+}
+
+/* ----------------- Sample sprite ------------------- */
+.sprite {
+    width: 50px;
+    height: 72px;
+    background-image: url("http://s.cdpn.io/79/sprite-steps.png");
+
+    -webkit-animation: play .8s steps(10) infinite;
+    -moz-animation: play .8s steps(10) infinite;
+    -ms-animation: play .8s steps(10) infinite;
+    -o-animation: play .8s steps(10) infinite;
+    animation: play .8s steps(10) infinite;
+}
+
+@-webkit-keyframes play {
+    from {
+        background-position: 0px;
+    }
+    to {
+        background-position: -500px;
+    }
+}
+
+@-moz-keyframes play {
+    from {
+        background-position: 0px;
+    }
+    to {
+        background-position: -500px;
+    }
+}
+
+@-ms-keyframes play {
+    from {
+        background-position: 0px;
+    }
+    to {
+        background-position: -500px;
+    }
+}
+
+@-o-keyframes play {
+    from {
+        background-position: 0px;
+    }
+    to {
+        background-position: -500px;
+    }
+}
+
+@keyframes play {
+    from {
+        background-position: 0px;
+    }
+    to {
+        background-position: -500px;
+    }
+}

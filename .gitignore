@@ -1,6 +1,9 @@
 /vendor
-/node_modules
+node_modules
 Homestead.yaml
 .env
 .idea/
 storage/debugbar/
+logs
+.DS_Store
+dist
